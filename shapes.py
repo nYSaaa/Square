@@ -14,18 +14,22 @@ class square:
         self.square_surface = screen
     
     def draw(self):
-        Draw = pygame.draw.rect(self.square_surface, self.c_color,(self.pos, self.side, self.width))
-        return Draw
+        Draw_Square = pygame.draw.rect(self.square_surface, self.c_color,(self.pos[0],self.pos[1], self.side, self.width))
+        return Draw_Square
 
     def grow(self,s):
         self.side = self.side + s
-        Draw_Square = pygame.draw.rect(self.square_surface, self.c_color,(self.pos, self.side, self.width))
+        self.width = self.width + s
+        Draw_Square = pygame.draw.rect(self.square_surface, self.c_color,(self.pos[0],self.pos[1], self.side, self.width))
         return Draw_Square
 
-obj = square(purple,(250,250),25,0)
+obj = square(purple,(250,250),100,100)
 
 while 1:
     for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             screen.fill((255,255,255))
             obj.draw()
